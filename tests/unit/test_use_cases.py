@@ -4,7 +4,6 @@ from mock import patch
 import json
 import os
 
-
 with open(
     os.path.join(os.path.dirname(__file__), "events", "new_publication.json")
 ) as file:
@@ -19,7 +18,7 @@ class FlaskTest(unittest.TestCase):
     def test_root(self):
         response = app.test_client().post(
             "/api/v1/post/123",
-            data=json.dumps(dict(foo="bar")),
+            data=data,
             content_type="application/json",
         )
         self.assertEqual(response.status_code, 200)
@@ -27,6 +26,3 @@ class FlaskTest(unittest.TestCase):
 
 if __name__ == "__main__":
     unittest.main()
-
-
-FlaskTest()
