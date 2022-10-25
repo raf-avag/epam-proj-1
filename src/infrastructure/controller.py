@@ -1,6 +1,5 @@
 from abc import ABCMeta
 
-from src.infrastructure import repositories
 from .config import SLACK, EMAIL
 from src.core.use_cases import NotifierUseCase
 from .services import LoggerService, EmailService, SlackService

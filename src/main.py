@@ -16,8 +16,7 @@ app = create_app()
 def post(post_id):
     content = request.json
     views.APIView(content).post()
-    return "Message posted to %s: %s" % (post_id, content), "info"
-    return "OK"
+    return "Message posted %s: %s" % (post_id, content), "info"
 
 
 if __name__ == "__main__":
