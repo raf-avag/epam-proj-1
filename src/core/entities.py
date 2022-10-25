@@ -41,3 +41,8 @@ class EventEntity:
         if type(to) not in (None, str):
             raise ValueError("%s is not a valid to type." % type(to))
         self.to = to
+
+    def __str__(self) -> str:
+        if self.event_type == "new_publication":
+            return "A new publication"
+        return "Approved publication"

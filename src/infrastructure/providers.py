@@ -1,4 +1,4 @@
-from core.interfaces import (
+from src.core.interfaces import (
     BaseEmailServiceProvider,
     BaseLoggerProvider,
     BaseMessengerServiceProvider,

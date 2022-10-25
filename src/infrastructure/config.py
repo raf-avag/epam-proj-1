@@ -9,3 +9,4 @@ class SLACK:
     secret = "SLACK_CLIENT_SECRET"
     signing = "SLACK_SIGNING_SECRET"
     bot = "SLACK_BOT_SECRET"
+    channel = "notifications"

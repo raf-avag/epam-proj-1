@@ -1,8 +1,8 @@
 from abc import ABCMeta
-from config import SLACK, EMAIL
-from core.use_cases import NotifierUseCase
-from infrastructure.services import LoggerService, EmailService, SlackService
-from infrastructure.providers import (
+from .config import SLACK, EMAIL
+from src.core.use_cases import NotifierUseCase
+from .services import LoggerService, EmailService, SlackService
+from .providers import (
     LoggerServiceProvider,
     EmailServiceProvider,
     SlackMessengerProvider,

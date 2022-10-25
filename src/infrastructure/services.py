@@ -1,7 +1,7 @@
 import smtplib
 import logging
 from slack_sdk import WebClient
-from config import EMAIL
+from .config import EMAIL
 
 
 class LoggerService:

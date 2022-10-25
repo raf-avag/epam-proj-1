@@ -1,5 +1,6 @@
-from core.interfaces import BaseUseCase
-from infrastructure.serializers import EventSerializer
+from .interfaces import BaseUseCase
+from src.infrastructure.serializers import EventSerializer
+from src.infrastructure.config import SLACK
 
 
 class NotifierUseCase(BaseUseCase):
@@ -9,4 +10,6 @@ class NotifierUseCase(BaseUseCase):
         self._email = _email
 
     def execute(self):
-        pass
+        event = EventSerializer(self._data).deserialize
+        if event.event_type == "new_publication":
+            self._slack.send_message(SLACK.channel, event)
