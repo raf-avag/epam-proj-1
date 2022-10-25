@@ -1,4 +1,6 @@
 from abc import ABCMeta
+
+from src.infrastructure import repositories
 from .config import SLACK, EMAIL
 from src.core.use_cases import NotifierUseCase
 from .services import LoggerService, EmailService, SlackService
@@ -7,26 +9,18 @@ from .providers import (
     EmailServiceProvider,
     SlackMessengerProvider,
 )
+from .repositories import ConfigRepo
 
 
 class BaseController(metaclass=ABCMeta):
-    def __init__(
-        self,
-        _slack_service,
-        _email_service,
-        _logger_service,
-        _env_repo,
-        _email_service_provider,
-        _messenger_service_provider,
-        _logger_service_provider,
-    ) -> None:
-        self._slack_service = _slack_service
-        self._email_service = _email_service
-        self._logger_service = _logger_service
-        self._env_repo = _env_repo
-        self._email_service_provider = _email_service_provider
-        self._messenger_service_provider = _messenger_service_provider
-        self._logger_service_provider = _logger_service_provider
+    def __init__(self) -> None:
+        self._slack_service = None
+        self._email_service = None
+        self._logger_service = None
+        self._env_repo = ConfigRepo()
+        self._email_service_provider = None
+        self._messenger_service_provider = None
+        self._logger_service_provider = None
 
     @property
     def logger_service(self) -> LoggerService:
@@ -76,5 +70,7 @@ class BaseController(metaclass=ABCMeta):
 
 class APIController(BaseController):
     def process_event(self, request):
+        self.logger_provider.info("process_event initiated")
         use_case = NotifierUseCase(request, self.slack_provider, self.email_provider)
-        use_case.execute()
+        self.logger_provider.info("use_case initiated")
+        return use_case.execute()

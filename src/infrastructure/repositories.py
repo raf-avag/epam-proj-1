@@ -1,4 +1,4 @@
-from core.entities import EnvItemEntity
+from src.core.entities import EnvItemEntity
 import pydotenv
 
 

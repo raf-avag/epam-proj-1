@@ -1,5 +1,6 @@
 from flask.views import MethodView
 from src.infrastructure.controller import APIController
+from flask import Response
 
 
 class APIView(MethodView):
@@ -9,3 +10,4 @@ class APIView(MethodView):
     def post(self):
         controller = APIController()
         controller.process_event(self.request)
+        return Response(status=200)

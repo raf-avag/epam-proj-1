@@ -6,7 +6,15 @@ from .config import EMAIL
 
 class LoggerService:
     def __init__(self) -> None:
+        logging.basicConfig(
+            filename="logfile.log",
+            filemode="a",
+            format="%(asctime)s,%(msecs)d %(name)s %(levelname)s %(message)s",
+            datefmt="%H:%M:%S",
+            level=logging.DEBUG,
+        )
         self.logger = logging
+        self.logger.info("Logger initiated")
 
 
 class EmailService:
@@ -20,7 +28,7 @@ class EmailService:
 class SlackService:
     def __init__(self, logger, token) -> None:
         self.__client = WebClient(token=token)
-        # log
+        logger.logger.info("Initiated SlackService")
 
     @property
     def client(self):

@@ -25,9 +25,7 @@ class EnvItemEntity:
 
 
 class EventEntity:
-    @property
-    def EVENT_TYPES():
-        return ("new_publication", "approved_publication")
+    EVENT_TYPES = ("new_publication", "approved_publication")
 
     def __init__(self, event_type, body, to=None):
         if event_type not in self.EVENT_TYPES:
@@ -42,7 +40,7 @@ class EventEntity:
             raise ValueError("%s is not a valid to type." % type(to))
         self.to = to
 
-    def __str__(self) -> str:
+    def __repr__(self) -> str:
         if self.event_type == "new_publication":
-            return "A new publication"
-        return "Approved publication"
+            return "a new publication"
+        return "approved publication"

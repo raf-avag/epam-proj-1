@@ -1,6 +1,7 @@
 from .interfaces import BaseUseCase
 from src.infrastructure.serializers import EventSerializer
 from src.infrastructure.config import SLACK
+from flask import Response
 
 
 class NotifierUseCase(BaseUseCase):
@@ -10,6 +11,7 @@ class NotifierUseCase(BaseUseCase):
         self._email = _email
 
     def execute(self):
-        event = EventSerializer(self._data).deserialize
+        event = EventSerializer(self._data).deserialize()
         if event.event_type == "new_publication":
-            self._slack.send_message(SLACK.channel, event)
+            self._slack.send_message(SLACK.channel, "Attention: there is " + str(event))
+            return Response(status=202)
